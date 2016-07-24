@@ -1,0 +1,19 @@
+
+;; ----- smex-history -----
+(
+ ag
+ cider-jack-in
+ paradox-list-packages
+ linum-mode
+ cd
+ ri
+ 5x5
+)
+
+;; ----- smex-data -----
+(
+ (paradox-list-packages . 4)
+ (linum-mode . 1)
+ (cider-jack-in . 2)
+ (ag . 2)
+)
