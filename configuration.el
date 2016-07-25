@@ -804,3 +804,8 @@
 (setq linum-format " %3d ")
 
 (add-hook 'prog-mode-hook 'linum-mode)
+
+(global-aggressive-indent-mode 1)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+
+(mode-icons-mode)

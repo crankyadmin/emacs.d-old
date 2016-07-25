@@ -1450,3 +1450,10 @@ Sane indentation
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 #+END_SRC
+** Mode Icons
+Its always nice to have some pretty icons
+https://github.com/ryuslash/mode-icons
+
+#+BEGIN_SRC emacs-lisp
+(mode-icons-mode)
+#+END_SRC

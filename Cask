@@ -90,3 +90,4 @@
 (depends-on "clj-refactor")
 (depends-on "clojure-mode")
 (depends-on "aggressive-indent")
+(depends-on "mode-icons")
