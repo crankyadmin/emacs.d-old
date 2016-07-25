@@ -15,12 +15,6 @@
 (cask-initialize)
 (require 'pallet)
 
-;;  (evil-mode 1)
-
-;;  (global-evil-surround-mode 1)
-
-;; (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-
 (defun hrs/view-buffer-name ()
   "Display the filename of the current buffer."
   (interactive)
@@ -127,18 +121,18 @@
   (hrs/insert-random-string 30))
 
 (tool-bar-mode 0)
-(menu-bar-mode 0)
+  (menu-bar-mode 0)
 (when window-system
   (scroll-bar-mode -1))
 
 (global-prettify-symbols-mode t)
 
 (when window-system
-  (load-theme 'darkokai t))
+  (load-theme 'badwolf t))
 
 (setq ring-bell-function 'ignore)
 
-(setq hrs/default-font "Inconsolata")
+(setq hrs/default-font "OfficeCodeProD-Regular")
 (setq hrs/default-font-size 18)
 (setq hrs/current-font-size hrs/default-font-size)
 
@@ -798,6 +792,12 @@
 
 (define-key input-decode-map "\e[1;2A" [S-up])
 
+(setq paradox-async-display-buffer-function nil)
+(setq paradox-column-width-package 30)
+(setq paradox-column-width-version 14)
+(setq paradox-display-download-count t)
+(setq paradox-execute-asynchronously t)
+
 (require 'hlinum)
 (hlinum-activate)
 
@@ -810,10 +810,10 @@
 
 (mode-icons-mode)
 
-(setq tabbar-ruler-global-tabbar t)    ; get tabbar
-(setq tabbar-ruler-popup-menu t)       ; get popup menu.
-(setq tabbar-ruler-popup-toolbar t)    ; get popup toolbar
-(setq tabbar-ruler-popup-scrollbar t)  ; show scroll-bar on mouse-move
+; (setq tabbar-ruler-global-tabbar t)    ; get tabbar
+; (setq tabbar-ruler-popup-menu t)       ; get popup menu.
+; (setq tabbar-ruler-popup-toolbar t)    ; get popup toolbar
+; (setq tabbar-ruler-popup-scrollbar t)  ; show scroll-bar on mouse-move
 (require 'tabbar-ruler)
 
 (setq helm-M-x-fuzzy-match t)
