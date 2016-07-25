@@ -36,26 +36,6 @@ I use =cask= and =pallet= for managing packages.
   (require 'pallet)
 #+END_SRC
 
-* =evil-mode=
-
-Use =evil=.
-
-#+BEGIN_SRC emacs-lisp
-;;  (evil-mode 1)
-#+END_SRC
-
-Enable =surround= everywhere.
-
-#+BEGIN_SRC emacs-lisp
- ;;  (global-evil-surround-mode 1)
-#+END_SRC
-
-Bind =C-p= to fuzzy-finding files in the current project.
-
-#+BEGIN_SRC emacs-lisp
- ;; (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-#+END_SRC
-
 * Utility functions
 
 Define a big ol' bunch of handy utility functions.
