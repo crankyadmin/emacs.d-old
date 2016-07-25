@@ -809,3 +809,11 @@
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 
 (mode-icons-mode)
+
+(setq tabbar-ruler-global-tabbar t)    ; get tabbar
+(setq tabbar-ruler-popup-menu t)       ; get popup menu.
+(setq tabbar-ruler-popup-toolbar t)    ; get popup toolbar
+(setq tabbar-ruler-popup-scrollbar t)  ; show scroll-bar on mouse-move
+(require 'tabbar-ruler)
+
+(global-set-key (kbd "M-x") 'helm-M-x)

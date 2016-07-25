@@ -1457,3 +1457,21 @@ https://github.com/ryuslash/mode-icons
 #+BEGIN_SRC emacs-lisp
 (mode-icons-mode)
 #+END_SRC
+** Tabbar
+#+BEGIN_SRC emacs-lisp
+(setq tabbar-ruler-global-tabbar t)    ; get tabbar
+(setq tabbar-ruler-popup-menu t)       ; get popup menu.
+(setq tabbar-ruler-popup-toolbar t)    ; get popup toolbar
+(setq tabbar-ruler-popup-scrollbar t)  ; show scroll-bar on mouse-move
+(require 'tabbar-ruler)
+#+END_SRC
+** Helm
+
+Helm: https://emacs-helm.github.io/helm/
+
+Maps M-x to helm-M-x and enables fuzzy matching
+
+#+BEGIN_SRC emacs-lisp
+(setq helm-M-x-fuzzy-match t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+#+END_SRC

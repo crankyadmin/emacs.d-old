@@ -91,3 +91,5 @@
 (depends-on "clojure-mode")
 (depends-on "aggressive-indent")
 (depends-on "mode-icons")
+(depends-on "tabbar-ruler")
+(depends-on "helm")
