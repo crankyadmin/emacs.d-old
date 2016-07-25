@@ -89,4 +89,4 @@
 (depends-on "cider")
 (depends-on "clj-refactor")
 (depends-on "clojure-mode")
-
+(depends-on "aggressive-indent")

@@ -623,7 +623,172 @@
 
 (engine-mode t)
 
-(global-set-key (kbd "C-w") 'backward-kill-word)
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+
+;; ligatures
+;;(mac-auto-operator-composition-mode)
+
+(setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'super)
+
+;; Mac Key Bindings
+
+(global-set-key (kbd "s-S")   'write-file)
+(global-set-key (kbd "s-s")   'save-buffer)
+(global-set-key (kbd "s-i")   'dired-jump-other-window)
+(global-set-key (kbd "s-l")   'goto-line)
+(global-set-key (kbd "s-q")   'save-buffers-kill-emacs)
+(global-set-key (kbd "s-x")   'kill-region)
+(global-set-key (kbd "s-c")   'kill-ring-save)
+(global-set-key (kbd "s-v")   'yank)
+(global-set-key (kbd "s-a")   'mark-whole-buffer)
+(global-set-key (kbd "s-f")   'isearch-forward)
+(global-set-key (kbd "s-M-f")     'occur)
+(global-set-key (kbd "s-g")   'isearch-repeat-forward)
+(global-set-key (kbd "s-G")   'isearch-repeat-backward)
+(global-set-key (kbd "s-m")   'iconify-frame)
+(global-set-key (kbd "s-`")   'other-frame)
+(global-set-key (kbd "s-n")   'make-frame-command)
+(global-set-key (kbd "s-w")   'delete-frame)
+(global-set-key (kbd "s-?")   'info)
+(global-set-key (kbd "s-.")       'keyboard-quit)
+(global-unset-key (kbd "s-<left>"))
+(global-unset-key (kbd "s-<right>"))
+(global-unset-key (kbd "s-<up>"))
+(global-unset-key (kbd "s-<down>"))
+(global-set-key (kbd "s-<left>")  'move-beginning-of-line)
+(global-set-key (kbd "s-<right>") 'move-end-of-line)
+(global-set-key (kbd "s-<up>")    'beginning-of-buffer)
+(global-set-key (kbd "s-<down>")  'end-of-buffer)
+
+
+;; kill window with buffer
+(global-unset-key (kbd "s-W"))
+(global-set-key (kbd "s-W")  ; 【⌘⇧W】
+'kill-buffer-and-window)
+
+;; recent files
+(global-set-key (kbd "s-r") 'helm-recentf)
+
+;; one-key macros record
+(global-unset-key (kbd "s-M"))
+(global-set-key (kbd "s-M")   'call-last-kbd-macro)
+(global-set-key (kbd "M-s-m") 'toggle-kbd-macro-recording-on)
+
+(defun open-next-line (arg)
+  "Move to the next line and then opens a line.
+    See also `newline-and-indent'."
+  (interactive "p")
+  (end-of-line)
+  (open-line arg)
+  (next-line 1)
+  (when newline-and-indent
+    (indent-according-to-mode)))
+
+(defun open-previous-line (arg)
+  "Open a new line before the current one.
+     See also `newline-and-indent'."
+  (interactive "p")
+  (beginning-of-line)
+  (open-line arg)
+  (when newline-and-indent
+    (indent-according-to-mode)))
+
+(defvar newline-and-indent t
+  "Modify the behavior of the open-*-line functions to cause them to autoindent.")
+
+;; smart open line
+(global-set-key (kbd "S-RET")        'open-next-line)
+(global-set-key (kbd "S-<return>")   'open-next-line)
+(global-set-key (kbd "S-C-RET")      'open-previous-line)
+(global-set-key (kbd "S-C-<return>") 'open-previous-line)
+(global-set-key (kbd "C-<return>")   'open-next-line)
+(global-set-key (kbd "C-RET")        'open-next-line)
+(global-set-key (kbd "S-s-RET")      'open-previous-line)
+(global-set-key (kbd "S-s-<return>") 'open-previous-line)
+(global-set-key (kbd "s-RET")        'open-next-line)
+(global-set-key (kbd "s-<return>")   'open-next-line)
+
+;; comment-region
+;; I'm using evil nerd commenter which is mapped to M-;
+;; (global-set-key (kbd "s-/") 'comment-or-uncomment-region-or-line)
+;; (global-set-key (kbd "s-#") 'comment-or-uncomment-region-or-line)
+;; (global-set-key (kbd "s-;") 'comment-or-uncomment-region-or-line)-
+
+;; text scale
+(global-set-key (kbd "s-=")
+                '(lambda () (interactive)
+                   (global-text-scale-adjust (- text-scale-mode-amount))
+                   (global-text-scale-mode -1)))
+(global-set-key (kbd "s-+")
+                '(lambda () (interactive) (global-text-scale-adjust 1)))
+(global-set-key (kbd "s--")
+                '(lambda () (interactive) (global-text-scale-adjust -1)))
+
+;; kill buffer
+(global-set-key (kbd "s-k") 'kill-buffer)
+
+;; kill buffer with frame
+(global-set-key (kbd "s-K") 'server-edit)
+
+;; ergonomic M-x
+(global-set-key (kbd "s-e")     'execute-extended-command)
+
+;; move text
+(global-set-key [s-up] 'move-text-up)
+(global-set-key [s-down] 'move-text-down)
+
+;; multiple cursors
+(global-set-key (kbd "C-|")  'mc/edit-lines)
+(global-set-key (kbd "s-\\") 'mc/edit-lines)
+
+(global-set-key (kbd "C-{") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-}") 'mc/mark-next-like-this)
+
+;; multiple cursors
+(global-set-key (kbd "C-|")  'mc/edit-lines)
+(global-set-key (kbd "s-\\") 'mc/edit-lines)
+
+(global-set-key (kbd "C-{") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-}") 'mc/mark-next-like-this)
+
+(global-unset-key (kbd "M-<down-mouse-1>"))
+(global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
+(global-set-key (kbd "s-<mouse-1>") 'mc/add-cursor-on-click)
+
+(defvar mc-mode-map (make-sparse-keymap)
+  "Keymap for `multiple-cursors'.")
+
+(global-set-key         (kbd "C-$")   'mc-mode-map)
+(define-key mc-mode-map (kbd "a")     'mc/mark-all-like-this)
+(define-key mc-mode-map (kbd "m")     'mc/mark-more-like-this-extended)
+(define-key mc-mode-map (kbd "+")     'mc/mark-more-like-this-extended)
+(define-key mc-mode-map (kbd "r")     'mc/mark-all-in-region)
+(define-key mc-mode-map (kbd "C-e")   'mc/edit-ends-of-lines)
+(define-key mc-mode-map (kbd "C-a")   'mc/edit-beginnings-of-lines)
+
+;; thing cmds
+(global-set-key (kbd "C-^")   'select-thing-near-point)
+(global-set-key (kbd "s-^")   'select-thing-near-point)
+(global-set-key (kbd "C-M-^") 'mark-enclosing-sexp)
+(global-set-key (kbd "s-M-^") 'mark-enclosing-sexp)
+
+;; undo tree
+;; (global-undo-tree-mode)
+
+(defalias 'redo 'undo-tree-redo)
+(global-set-key (kbd "s-z") 'undo)   ; 【⌘Z】
+(global-set-key (kbd "s-S-z") 'redo) ; 【⌘⇧Z】
+(global-set-key (kbd "S-s-z") 'redo) ; 【⌘⇧Z】
+(global-set-key (kbd "s-Z") 'redo)   ; 【⌘⇧Z】
+
+;; Multiple Cursor Key Bindings
+
+(global-set-key (kbd "C-s-n") 'mc/mark-next-lines)
+
+(global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
+
 (global-set-key (kbd "C-x C-k") 'kill-region)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "M-o") 'other-window)
