@@ -248,6 +248,7 @@
   (add-hook hook (lambda ()
                    (setq show-paren-style 'expression)
                    (paredit-mode)
+                   (smartparens-mode)
                    (rainbow-delimiters-mode))))
 
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
@@ -819,4 +820,6 @@
 (setq helm-M-x-fuzzy-match t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+
+(helm-mode 1)

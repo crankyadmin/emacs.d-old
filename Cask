@@ -94,3 +94,4 @@
 (depends-on "tabbar-ruler")
 (depends-on "helm")
 (depends-on "monokai-theme")
+(depends-on "smartparens")
