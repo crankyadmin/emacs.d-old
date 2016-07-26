@@ -1455,3 +1455,11 @@ Maps M-x to helm-M-x and enables fuzzy matching
 (setq helm-M-x-fuzzy-match t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(helm-mode 1)
+#+END_SRC

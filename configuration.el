@@ -128,7 +128,7 @@
 (global-prettify-symbols-mode t)
 
 (when window-system
-  (load-theme 'badwolf t))
+  (load-theme 'monokai t))
 
 (setq ring-bell-function 'ignore)
 
@@ -818,3 +818,5 @@
 
 (setq helm-M-x-fuzzy-match t)
 (global-set-key (kbd "M-x") 'helm-M-x)
+
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
