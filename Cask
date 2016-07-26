@@ -93,3 +93,4 @@
 (depends-on "mode-icons")
 (depends-on "tabbar-ruler")
 (depends-on "helm")
+(depends-on "monokai-theme")
