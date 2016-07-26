@@ -1457,9 +1457,20 @@ Maps M-x to helm-M-x and enables fuzzy matching
 (global-set-key (kbd "M-x") 'helm-M-x)
 #+END_SRC
 
+Use Helm for the buffers list
+
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-x C-b") #'helm-buffers-list)
 #+END_SRC
+
+Same for find files. Because why not.
+
+#+BEGIN_SRC emacs-lisp
+(setq helm-buffers-fuzzy-matching t)
+(global-set-key (kbd "C-x C-f") #'helm-find-files)
+#+END_SRC
+
+And turn Helm mode on
 
 #+BEGIN_SRC emacs-lisp
 (helm-mode 1)
