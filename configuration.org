@@ -171,7 +171,7 @@ Why not?
 
 #+BEGIN_SRC emacs-lisp
   (when window-system
-    (load-theme 'monokai t))
+    (load-theme 'darkokai t))
 #+END_SRC
 
 ** Disable visual bell
