@@ -128,7 +128,7 @@
 (global-prettify-symbols-mode t)
 
 (when window-system
-  (load-theme 'monokai t))
+  (load-theme 'darkokai t))
 
 (setq ring-bell-function 'ignore)
 
@@ -240,6 +240,7 @@
 
 (setq lispy-mode-hooks
       '(clojure-mode-hook
+        cider-mode-hook
         emacs-lisp-mode-hook
         lisp-mode-hook
         scheme-mode-hook))
@@ -815,11 +816,14 @@
 ; (setq tabbar-ruler-popup-menu t)       ; get popup menu.
 ; (setq tabbar-ruler-popup-toolbar t)    ; get popup toolbar
 ; (setq tabbar-ruler-popup-scrollbar t)  ; show scroll-bar on mouse-move
-(require 'tabbar-ruler)
+; (require 'tabbar-ruler)
 
 (setq helm-M-x-fuzzy-match t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 
 (global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+
+(setq helm-buffers-fuzzy-matching t)
+(global-set-key (kbd "C-x C-f") #'helm-find-files)
 
 (helm-mode 1)

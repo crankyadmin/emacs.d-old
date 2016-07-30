@@ -1377,6 +1377,10 @@ Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few usef
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
 #+END_SRC
 
+** Kill whole line with C-w
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-w") 'kill-whole-line)
+#+END_SRC
 * Set custom keybindings
 
 Just a few handy functions.
