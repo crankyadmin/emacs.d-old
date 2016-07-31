@@ -250,6 +250,7 @@
                    (setq show-paren-style 'expression)
                    (paredit-mode)
                    (smartparens-mode)
+                   (eldoc-mode)
                    (rainbow-delimiters-mode))))
 
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
@@ -785,6 +786,8 @@
 
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
 
+(global-set-key (kbd "C-w") 'kill-whole-line)
+
 (global-set-key (kbd "C-x C-k") 'kill-region)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "M-o") 'other-window)
@@ -827,3 +830,15 @@
 (global-set-key (kbd "C-x C-f") #'helm-find-files)
 
 (helm-mode 1)
+
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(setq company-idle-delay 0.2)
+(setq company-tooltip-limit 20)                      ; bigger popup window
+(setq company-tooltip-align-annotations 't)          ; align annotations to the right tooltip border
+(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+(global-set-key (kbd "C-c /") 'company-files)        ; Force complete file names on "C-c /" key
