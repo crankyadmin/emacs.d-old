@@ -93,3 +93,4 @@
 (depends-on "helm-company")
 (depends-on "monokai-theme")
 (depends-on "smartparens")
+(depends-on "ac-cider")
