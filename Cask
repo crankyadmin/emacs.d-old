@@ -94,3 +94,4 @@
 (depends-on "monokai-theme")
 (depends-on "smartparens")
 (depends-on "ac-cider")
+(depends-on "zerodark-theme")

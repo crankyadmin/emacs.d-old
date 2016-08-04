@@ -128,11 +128,11 @@
 (global-prettify-symbols-mode t)
 
 (when window-system
-  (load-theme 'darkokai t))
+  (load-theme 'zerodark t))
 
 (setq ring-bell-function 'ignore)
 
-(setq hrs/default-font "OfficeCodeProD-Regular")
+(setq hrs/default-font "Fira Code Retina")
 (setq hrs/default-font-size 18)
 (setq hrs/current-font-size hrs/default-font-size)
 
@@ -214,6 +214,8 @@
 
 (setq-default tab-width 2)
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (add-hook 'css-mode-hook
           (lambda ()
             (rainbow-mode)
@@ -256,6 +258,21 @@
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
 (hrs/add-auto-mode 'scheme-mode "\\.blu$")
+
+(require 'ac-cider)
+
+  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+  (eval-after-load "auto-complete"
+    '(progn
+       (add-to-list 'ac-modes 'cider-mode)
+       (add-to-list 'ac-modes 'cider-repl-mode)))
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+
+(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
 
 (setq magit-push-always-verify nil)
 
@@ -837,8 +854,7 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
-(setq company-idle-delay 0.2)
-(setq company-tooltip-limit 20)                      ; bigger popup window
-(setq company-tooltip-align-annotations 't)          ; align annotations to the right tooltip border
-(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-(global-set-key (kbd "C-c /") 'company-files)        ; Force complete file names on "C-c /" key
+(ac-config-default)
+
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+    (setq exec-path (append exec-path '("/usr/local/bin")))
