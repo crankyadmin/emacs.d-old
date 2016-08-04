@@ -1415,6 +1415,8 @@ Just a few handy functions.
   (global-set-key (kbd "M-#") 'sort-lines)
   (global-set-key (kbd "C-c s") 'multi-term)
   (global-set-key (kbd "C-x g") 'magit-status)
+  (global-set-key [remap kill-whole-line] 'crux-kill-whole-line)
+  (global-set-key (kbd "s-J") 'crux-top-join-line)
 #+END_SRC
 
 Remap when working in terminal Emacs.
