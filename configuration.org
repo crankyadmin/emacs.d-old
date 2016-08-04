@@ -312,6 +312,12 @@ This reduces that.
   (setq-default tab-width 2)
 #+END_SRC
 
+Strip white space on save
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
+
 ** CSS and Sass
 
 Indent 2 spaces and use =rainbow-mode= to display color-related words in the
