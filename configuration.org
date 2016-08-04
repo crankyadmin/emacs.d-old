@@ -197,7 +197,7 @@ Note that this overrides the default font-related keybindings from
 =sensible-defaults=.
 
 #+BEGIN_SRC emacs-lisp
-  (setq hrs/default-font "OfficeCodeProD-Regular")
+  (setq hrs/default-font "Fira Code Retina")
   (setq hrs/default-font-size 18)
   (setq hrs/current-font-size hrs/default-font-size)
 
