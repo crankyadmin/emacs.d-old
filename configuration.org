@@ -1530,3 +1530,11 @@ To get out of multiple-cursors-mode, press <return> or C-g. The latter will firs
 #+BEGIN_SRC emacs-lisp
   (ac-config-default)
 #+END_SRC
+** Projectile
+
+Projectile seems to be trashing its path... Drugs?!?
+
+#+BEGIN_SRC emacs-lisp
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+    (setq exec-path (append exec-path '("/usr/local/bin")))
+#+END_SRC
