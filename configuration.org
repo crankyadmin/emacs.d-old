@@ -1032,7 +1032,6 @@ Always enable =abbrev-mode=:
 #+BEGIN_SRC emacs-lisp
   (smex-initialize)
 
-  (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 #+END_SRC
 
