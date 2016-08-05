@@ -4,10 +4,25 @@
 (sensible-defaults/use-all-keybindings)
 
 (setq user-full-name "Greg Nwosu"
-      user-mail-address "greg.nwosu@gmail.com"
-      calendar-latitude 42.2
-      calendar-longitude -71.1
-      calendar-location-name "London, UK")
+        user-mail-address "greg.nwosu@gmail.com"
+        calendar-latitude 42.2
+        calendar-longitude -71.1
+        calendar-location-name "London, UK")
+
+;;; mail
+(setq mail-user-agent 'message-user-agent)
+(setq user-mail-address "greg.nwosu@gmail.com"
+        user-full-name "greg")
+
+(setq smtpmail-smtp-server "smtp.gmail.com")
+
+(setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "greg.nwosu@gmail.com" nil))
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      smtpmail-local-domain "Some Smtp server")
 
 (add-to-list 'load-path "~/.emacs.d/resources/")
 
@@ -164,11 +179,11 @@
              (floor (/ hrs/current-font-size hrs/font-change-increment))))
   (hrs/set-font-size))
 
-(define-key global-map (kbd "C-)") 'hrs/reset-font-size)
-(define-key global-map (kbd "C-+") 'hrs/increase-font-size)
-(define-key global-map (kbd "C-=") 'hrs/increase-font-size)
-(define-key global-map (kbd "C-_") 'hrs/decrease-font-size)
-(define-key global-map (kbd "C--") 'hrs/decrease-font-size)
+;;(define-key global-map (kbd "C-)") 'hrs/reset-font-size)
+;;(define-key global-map (kbd "C-+") 'hrs/increase-font-size)
+;;(define-key global-map (kbd "C-=") 'hrs/increase-font-size)
+;;(define-key global-map (kbd "C-_") 'hrs/decrease-font-size)
+;;(define-key global-map (kbd "C--") 'hrs/decrease-font-size)
 
 (hrs/reset-font-size)
 
@@ -212,9 +227,70 @@
 
 (setq whitespace-line-column 500)
 
+(autoload 'window-number-mode "window-number"
+   "A global minor mode that enables selection of windows according to
+ numbers with the C-x C-j prefix.  Another mode,
+ `window-number-meta-mode' enables the use of the M- prefix."
+   t)
+
+(autoload 'window-number-meta-mode "window-number"
+   "A global minor mode that enables use of the M- prefix to select
+ windows, use `window-number-mode' to display the window numbers in
+ the mode-line."
+   t)
+
+(window-number-mode 1)
+(window-number-meta-mode 1)
+
+(require 'window-numbering)
+(window-numbering-mode 1)
+
+(defun window-toggle-split-direction ()
+  "Switch window split from horizontally to vertically, or vice versa.
+
+i.e. change right window to bottom, or change bottom window to right."
+  (interactive)
+  (require 'windmove)
+  (let ((done))
+    (dolist (dirs '((right . down) (down . right)))
+      (unless done
+        (let* ((win (selected-window))
+               (nextdir (car dirs))
+               (neighbour-dir (cdr dirs))
+               (next-win (windmove-find-other-window nextdir win))
+               (neighbour1 (windmove-find-other-window neighbour-dir win))
+               (neighbour2 (if next-win (with-selected-window next-win
+                                          (windmove-find-other-window neighbour-dir next-win)))))
+          ;;(message "win: %s\nnext-win: %s\nneighbour1: %s\nneighbour2:%s" win next-win neighbour1 neighbour2)
+          (setq done (and (eq neighbour1 neighbour2)
+                          (not (eq (minibuffer-window) next-win))))
+          (if done
+              (let* ((other-buf (window-buffer next-win)))
+                (delete-window next-win)
+                (if (eq nextdir 'right)
+                    (split-window-vertically)
+                  (split-window-horizontally))
+                (set-window-buffer (windmove-find-other-window neighbour-dir) other-buf))))))))
+
+(global-set-key (kbd "C-x t") 'window-toggle-split-direction)
+
+;;; paths and stuff
+(setq exec-path (append exec-path '(":~/bin")))
+(setq exec-path (append exec-path '(":~/lib/scala/bin")))
+(setq exec-path (append exec-path '(":~/.local/bin")))
+(setq exec-path (append exec-path '(":~/.cabal/bin")))
+(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
+     (setenv "PATH" (concat my-cabal-path ":" (getenv "PATH")))
+     (add-to-list 'exec-path my-cabal-path))
+
 (setq-default tab-width 2)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(setq greg-prog-modes
+      '(scheme-mode emacs-lisp-mode lisp-mode clojure-mode haskell-mode python-mode scala-mode ensime-mode))
+(setq greg-lisp-modes
+      '(scheme-mode emacs-lisp-mode lisp-mode clojure-mode))
 
 (add-hook 'css-mode-hook
           (lambda ()
@@ -225,13 +301,51 @@
 
 (setq scss-compile-at-save nil)
 
-(setq exec-path (append exec-path (list "~/.cabal/bin")))
+(setq haskell-font-lock-symbols t)
+ (setq haskell-process-auto-import-loaded-modules t)
+ (setq haskell-process-log t)
+ (setq haskell-process-suggest-remove-import-lines t)
+ (setq haskell-process-type (quote stack-ghci))
+ (setq haskell-indentation-show-indentations nil)
+
+ (autoload 'ghc-init "ghc" nil t)
+ (autoload 'ghc-debug "ghc" nil t)
+ (add-to-list 'load-path "~/.stack/snapshots/x86_64-linux/lts-6.1/7.10.3/share/x86_64-linux-ghc-7.10.3/HaRe-0.8.2.3/elisp")
+
+ (autoload 'hare-init "hare" nil t)
+ (require 'hare)
 
 (add-hook 'haskell-mode-hook
+              (lambda ()
+                (require 'rainbow-delimiters)
+                (require 'smartparens)
+                (require 'smartparens-config)
+                (rainbow-delimiters-mode)
+                (smartparens-mode)
+                (haskell-doc-mode)
+                (turn-on-haskell-indent)
+                (intero-mode)
+                (ghc-init)
+                (hare-init)))
+
+(add-hook 'intero-mode-hook
           (lambda ()
-            (haskell-doc-mode)
-            (turn-on-haskell-indent)
-            (ghc-init)))
+            (define-key intero-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
+            (setq ghc-check-command t)))
+
+(add-hook 'scala-mode-hook (lambda()
+                             ;;(c-subword-mode 1) studly word boundaries nice p
+                             (smartparens-mode)
+                             (ensime-scala-mode-hook)
+                             (yas-reload-all)
+                             (setq indent-line-function 'scala-indent-or-complete)
+                             ))
+
+(setq scala-font-lock:mark-reserved-symbols)
+;; (global-set-key (kbd "C-c C-r r") 'ensime-refactor-rename)
+;; (global-set-key (kbd "C-c C-o i") 'ensime-refactor-organize-imports)
+;; (global-set-key (kbd "C-c C-i l") 'ensime-refactor-inline-local)
+;; (global-set-key (kbd "C-c C-t i") 'ensime-inspect-by-path)
 
 (setq js-indent-level 2)
 
@@ -327,6 +441,64 @@
  "\\.rhtml$")
 
 (add-hook 'yaml-mode-hook 'rspec-mode)
+
+(smartparens-global-mode t)
+(show-smartparens-global-mode t)
+
+(define-key sp-keymap (kbd "<delete>") 'sp-delete-char)
+(define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
+(define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
+(define-key sp-keymap (kbd "C-S-<right>") 'sp-backward-barf-sexp)
+(define-key sp-keymap (kbd "C-S-<left>") 'sp-backward-slurp-sexp)
+(define-key sp-keymap (kbd "M-s") 'sp-unwrap-sexp)
+(define-key sp-keymap (kbd "M-S-s") 'sp-raise-sexp)
+(define-key sp-keymap (kbd "M-i") 'sp-split-sexp)
+(define-key sp-keymap (kbd "M-S-i") 'sp-join-sexp)
+(define-key sp-keymap (kbd "M-t") 'sp-transpose-sexp)
+(define-key sp-keymap (kbd "M-S-<left>") 'sp-backward-sexp)
+(define-key sp-keymap (kbd "M-S-<right>") 'sp-forward-sexp)
+
+
+
+
+(sp-with-modes greg-prog-modes
+
+  (sp-local-pair "(" ")" :bind "M-(")
+  (sp-local-pair "[" "]" :bind "M-[")
+  (sp-local-pair "{" "}" :bind "M-{")
+  (sp-local-pair "\"" "\"" :bind "M-\""))
+
+(defun sp--my-create-newline-and-enter-sexp (&rest _ignored)
+  "Open a new brace or bracket expression, with relevant newlines and indent. "
+  (newline)
+  (indent-according-to-mode)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(sp-with-modes '(c-mode c++-mode js-mode js2-mode java-mode, scala-mode, ensime-mode, python-mode
+                        typescript-mode perl-mode)
+  (sp-local-pair "{" nil :post-handlers
+                 '((sp--my-create-newline-and-enter-sexp "RET"))))
+
+;; Insert space after pair if immediately followed by a word in Lisp modes
+
+
+(defun sp--my-add-space-after-sexp-insertion (id action _context)
+  (when (eq action 'insert)
+    (save-excursion
+      (forward-char (length (plist-get (sp-get-pair id) :close)))
+      (when (or (eq (char-syntax (following-char)) ?w)
+                (looking-at (sp--get-opening-regexp)))
+        (insert " ")))))
+
+
+(sp-with-modes greg-lisp-modes
+  (sp-local-pair "(" nil :post-handlers
+                 '(:add sp--my-add-space-after-sexp-insertion)))
+
+
+(--each '(scala-mode ensime-mode scala-mode2 inferior-scala-mode)
+  (add-to-list 'sp-sexp-suffix (list it 'regexp "")))
 
 (setq multi-term-program-switches "--login")
 
@@ -637,7 +809,7 @@
 (global-set-key (kbd "s-q")   'save-buffers-kill-emacs)
 (global-set-key (kbd "s-x")   'kill-region)
 (global-set-key (kbd "s-c")   'kill-ring-save)
-(global-set-key (kbd "s-v")   'yank)
+;;(global-set-key (kbd "s-v")   'yank)
 (global-set-key (kbd "s-a")   'mark-whole-buffer)
 (global-set-key (kbd "s-f")   'isearch-forward)
 (global-set-key (kbd "s-M-f")     'occur)
@@ -653,10 +825,10 @@
 (global-unset-key (kbd "s-<right>"))
 (global-unset-key (kbd "s-<up>"))
 (global-unset-key (kbd "s-<down>"))
-(global-set-key (kbd "s-<left>")  'move-beginning-of-line)
-(global-set-key (kbd "s-<right>") 'move-end-of-line)
-(global-set-key (kbd "s-<up>")    'beginning-of-buffer)
-(global-set-key (kbd "s-<down>")  'end-of-buffer)
+;;(global-set-key (kbd "s-<left>")  'move-beginning-of-line)
+;;(global-set-key (kbd "s-<right>") 'move-end-of-line)
+;;(global-set-key (kbd "s-<up>")    'beginning-of-buffer)
+;;(global-set-key (kbd "s-<down>")  'end-of-buffer)
 
 
 ;; kill window with buffer
@@ -721,7 +893,9 @@
                 '(lambda () (interactive) (global-text-scale-adjust 1)))
 (global-set-key (kbd "s--")
                 '(lambda () (interactive) (global-text-scale-adjust -1)))
+;; reset gregs undo key
 
+(global-set-key (kbd "C-_") 'undo)
 ;; kill buffer
 (global-set-key (kbd "s-k") 'kill-buffer)
 
@@ -785,8 +959,6 @@
 
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
 
-(global-set-key (kbd "C-w") 'kill-whole-line)
-
 (global-set-key (kbd "C-x C-k") 'kill-region)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "M-o") 'other-window)
@@ -795,7 +967,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 (require 'crux)
-(global-set-key [remap kill-whole-line] 'crux-kill-whole-line)
+(global-set-key (kbd "C-K") 'crux-kill-whole-line)
 (global-set-key (kbd "s-J") 'crux-top-join-line)
 
 (define-key input-decode-map "\e[1;2A" [S-up])
