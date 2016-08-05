@@ -3,8 +3,8 @@
 (sensible-defaults/use-all-settings)
 (sensible-defaults/use-all-keybindings)
 
-(setq user-full-name "David Houston"
-      user-mail-address "root@crankyadmin.net"
+(setq user-full-name "Greg Nwosu"
+      user-mail-address "greg.nwosu@gmail.com"
       calendar-latitude 42.2
       calendar-longitude -71.1
       calendar-location-name "London, UK")
@@ -257,23 +257,6 @@
 
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
-(hrs/add-auto-mode 'scheme-mode "\\.blu$")
-
-(require 'ac-cider)
-
-  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-  (add-hook 'cider-mode-hook 'ac-cider-setup)
-  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
-  (eval-after-load "auto-complete"
-    '(progn
-       (add-to-list 'ac-modes 'cider-mode)
-       (add-to-list 'ac-modes 'cider-repl-mode)))
-(defun set-auto-complete-as-completion-at-point-function ()
-  (setq completion-at-point-functions '(auto-complete)))
-
-(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
-(add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
-
 (setq magit-push-always-verify nil)
 
 ;; (add-hook 'with-editor-mode-hook 'evil-insert-state)
@@ -516,7 +499,7 @@
 
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
-(add-hook 'after-init-hook 'global-company-mode)
+;; (add-hook 'after-init-hook 'global-company-mode)
 
 (setq-default indent-tabs-mode nil)
 
@@ -544,7 +527,6 @@
 
 (smex-initialize)
 
-(global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 (add-hook 'gfm-mode-hook 'flyspell-mode)
@@ -812,6 +794,10 @@
 (global-set-key (kbd "C-c s") 'multi-term)
 (global-set-key (kbd "C-x g") 'magit-status)
 
+(require 'crux)
+(global-set-key [remap kill-whole-line] 'crux-kill-whole-line)
+(global-set-key (kbd "s-J") 'crux-top-join-line)
+
 (define-key input-decode-map "\e[1;2A" [S-up])
 
 (setq paradox-async-display-buffer-function nil)
@@ -826,6 +812,21 @@
 (setq linum-format " %3d ")
 
 (add-hook 'prog-mode-hook 'linum-mode)
+
+(require 'ac-cider)
+
+  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+  (eval-after-load "auto-complete"
+    '(progn
+       (add-to-list 'ac-modes 'cider-mode)
+       (add-to-list 'ac-modes 'cider-repl-mode)))
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+
+(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
 
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)

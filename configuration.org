@@ -13,8 +13,8 @@ Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] for so
 * Set personal information
 
 #+BEGIN_SRC emacs-lisp
-  (setq user-full-name "David Houston"
-        user-mail-address "root@crankyadmin.net"
+  (setq user-full-name "Greg Nwosu"
+        user-mail-address "greg.nwosu@gmail.com"
         calendar-latitude 42.2
         calendar-longitude -71.1
         calendar-location-name "London, UK")
