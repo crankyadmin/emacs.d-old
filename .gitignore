@@ -3,6 +3,7 @@
 
 # Packaging
 .cask
+configuration.el
 /*.last
 /.mc-lists.el
 /ac-comphist.dat
