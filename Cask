@@ -2,6 +2,7 @@
 (source melpa)
 
 (depends-on "ac-cider")
+(depends-on "ac-emoji")
 (depends-on "ag")
 (depends-on "aggressive-indent")
 (depends-on "auctex")

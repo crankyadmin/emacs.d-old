@@ -1575,3 +1575,16 @@ Projectile seems to be trashing its path... Drugs?!?
 #+BEGIN_SRC emacs-lisp
   (evilnc-default-hotkeys)
 #+END_SRC
+** Auto-complete Emoji
+Because life is better with Emoji :sm
+
+#+BEGIN_SRC emacs-lisp
+  (set-fontset-font
+   t 'symbol
+   (font-spec :family "Apple Color Emoji") nil 'prepend)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'markdown-mode-hook 'ac-emoji-setup)
+  (add-hook 'git-commit-mode-hook 'ac-emoji-setup)
+#+END_SRC
