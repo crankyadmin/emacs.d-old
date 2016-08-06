@@ -1571,3 +1571,7 @@ Projectile seems to be trashing its path... Drugs?!?
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
     (setq exec-path (append exec-path '("/usr/local/bin")))
 #+END_SRC
+** Evil Nerd Commenter
+#+BEGIN_SRC emacs-lisp
+  (evilnc-default-hotkeys)
+#+END_SRC
