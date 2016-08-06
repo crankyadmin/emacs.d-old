@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/code/work/Aimia/cluster-launcher/" "~/.emacs.d.backup/")
+("~/dotfiles/davidhouton/emacs.d/" "~/Documents/companies/aimia/" "~/.emacs.d/" "~/code/work/Aimia/cluster-launcher/" "~/.emacs.d.backup/")

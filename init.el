@@ -4,6 +4,10 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
+(add-to-list 'load-path "~/.cask/")
+(setenv "PATH" (concat (getenv "PATH") ":/home/greg/.cask/bin"))
+    (setq exec-path (append exec-path '("/home/greg/.cask/bin")))
+
 
 (org-babel-load-file "~/.emacs.d/configuration.org")
 (custom-set-variables

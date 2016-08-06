@@ -1,0 +1,37 @@
+* README
+start here.....
+** close emacs
+** install cask
+https://caskroom.github.io/
+*** change your path to include cask
+**** mac
+???
+**** linux
+edit ~/.bashrc
+#+BEGIN_EXAMPLE bash
+export PATH=~/.cask/bin:$PATH
+#+END_EXAMPLE
+
+*** run cask from .emacs.d
+#+BEGIN_EXAMPLE bash
+cd ~/.emacs.d && cask
+#+END_EXAMPLE
+** install fonts
+Download the latest versions from the following urls and install via method below.
+- https://fontawsome.io/
+- https://github.com/fizzed/font-mfizz/releases
+- https://github.com/primer/octicons/releases
+- https://github.com/tonsky/FiraCode/releases
+- https://github.com/Keyamoon/IcoMoon-Free/archive/master.zip
+*** unix
+  cp the tff files into ~/.font
+*** mac
+  double click the tff files
+*
+** add cask elisp path to .emacs.d/init.el
+#+BEGIN_EXAMPLE elisp
+
+(add-to-list 'load-path "~/.cask/")
+
+#+END_EXAMPLE
+
