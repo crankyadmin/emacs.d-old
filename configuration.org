@@ -1246,9 +1246,14 @@ Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few usef
   (windmove-default-keybindings))
 #+END_SRC
 ** Make Emacs more friendly to Macs
+Turn on Ligitures, this only works with railwaycats build of Emacs
+
+https://github.com/railwaycat/homebrew-emacsmacport/releases
 #+BEGIN_SRC emacs-lisp
-;; ligatures
-;;(mac-auto-operator-composition-mode)
+  (mac-auto-operator-composition-mode)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
 
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'super)
@@ -1576,7 +1581,7 @@ Projectile seems to be trashing its path... Drugs?!?
   (evilnc-default-hotkeys)
 #+END_SRC
 ** Auto-complete Emoji
-Because life is better with Emoji :sm
+Because life is better with Emoji
 
 #+BEGIN_SRC emacs-lisp
   (set-fontset-font
