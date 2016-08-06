@@ -4,6 +4,8 @@
 # Packaging
 .cask
 configuration.el
+recentf
+.org-id-locations
 /*.last
 /.mc-lists.el
 /ac-comphist.dat
