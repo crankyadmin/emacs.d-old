@@ -1593,3 +1593,10 @@ Because life is better with Emoji
   (add-hook 'markdown-mode-hook 'ac-emoji-setup)
   (add-hook 'git-commit-mode-hook 'ac-emoji-setup)
 #+END_SRC
+** Yasnippet
+#+BEGIN_SRC emacs-lisp
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"))
+
+(yas-global-mode 1)
+#+END_SRC
