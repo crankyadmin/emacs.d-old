@@ -1,3 +1,13 @@
+;;; Cask --- Dave Houstons Cask file
+
+;;; Commentary:
+;;
+;;; Generally speaking I try and keep this tidy. Currently there is quite a lot
+;;; of stuff I don't need from when I forked from HRS.
+
+
+;;; Code:
+
 (source gnu)
 (source melpa)
 
@@ -34,6 +44,7 @@
 (depends-on "findr")
 (depends-on "flx-ido")
 (depends-on "flycheck")
+(depends-on "flycheck-cask")
 (depends-on "flycheck-package")
 (depends-on "flycheck-rust")
 (depends-on "geiser")
@@ -98,3 +109,5 @@
 (depends-on "yard-mode")
 (depends-on "yasnippet")
 (depends-on "zerodark-theme")
+
+;;; Cask ends here
