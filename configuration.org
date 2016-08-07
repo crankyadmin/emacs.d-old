@@ -1608,5 +1608,5 @@ Because life is better with Emoji
 
 #+BEGIN_SRC emacs-lisp
 (with-eval-after-load 'flycheck
-  (flycheck-pos-tip-mode)
+  (flycheck-pos-tip-mode))
 #+END_SRC
