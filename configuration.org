@@ -1600,3 +1600,13 @@ Because life is better with Emoji
 
 (yas-global-mode 1)
 #+END_SRC
+** Flycheck
+#+BEGIN_SRC emacs-lisp
+(eval-after-load 'flycheck '(flycheck-clojure-setup))
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode)
+#+END_SRC
