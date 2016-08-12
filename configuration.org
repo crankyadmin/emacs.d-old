@@ -343,6 +343,10 @@ programming.
 #+BEGIN_SRC emacs-lisp
   (setq whitespace-line-column 500)
 #+END_SRC
+** Save buffer upon losing focus
+#+BEGIN_SRC emacs-lisp
+(add-hook 'focus-out-hook 'save-buffer)
+#+END_SRC
 * Programming customizations
 
 I like shallow indentation, but tabs are displayed as 8 characters by default.
