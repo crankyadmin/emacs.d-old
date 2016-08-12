@@ -37,6 +37,10 @@ Download the latest versions from the following urls and install via method belo
 
 #+END_EXAMPLE
 
+** add custom path for themes that aren't installed by cask
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/resources/themes/")
+#+END_SRC
 
 * Use sensible-defaults.el
 
@@ -206,10 +210,10 @@ Why not?
 #+END_SRC
 
 ** Load up a color theme
-
+I like Firecode...
 #+BEGIN_SRC emacs-lisp
   (when window-system
-    (load-theme 'zerodark t))
+    (load-theme 'firecode t))
 #+END_SRC
 
 ** Disable visual bell
