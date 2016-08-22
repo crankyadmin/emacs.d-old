@@ -4,14 +4,19 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
-
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/cask")
+(add-to-list 'load-path "~/.emacs.d/resources/")
+(add-to-list 'load-path "~/.emacs.d/resources/themes/")
+(add-to-list 'load-path "~/.cask")
 (org-babel-load-file "~/.emacs.d/configuration.org")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("54ece5659cc7acdcd529dddd78675c2972a5ac69260af4a6aec517dcea16208b" "28ec8ccf6190f6a73812df9bc91df54ce1d6132f18b4c8fcc85d45298569eb53" "1fc1fdf975c8c8c3767c29787a063eee50cbceef903644a0771fa66568ee8777" "7c33d91f9896614a9c28e96def4cbd818f0aa7f151d1fb5d205862e86f2a3939" "a81bc918eceaee124247648fc9682caddd713897d7fd1398856a5b61a592cb62" "bffa9e9d8c1af5456a2a66957c5efe7dac080b5deca30ece7d41b96e966d3651" "9bb642187b302a23587b5ed0e0276772d836516c48c70fbf1dfea9fed55d0e38" "70403e220d6d7100bae7775b3334eddeb340ba9c37f4b39c189c2c29d458543b" default)))
+ '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256")))
  '(mode-icons
    (quote
     (("\\`CSS\\'" "css" xpm)
@@ -120,7 +125,16 @@
      ("\\` ?AI\\'" 61500 FontAwesome)
      ("\\` ?Isearch\\'" 61442)
      (default 61529 FontAwesome)
-     ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil)))))
+     ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
+ '(notmuch-search-line-faces
+   (quote
+    (("unread" :foreground "#aeee00")
+     ("flagged" :foreground "#0a9dff")
+     ("deleted" :foreground "#ff2c4b" :bold t))))
+ '(package-selected-packages
+   (quote
+    (objc-font-lock atom-one-dark-theme cask cider dash f haskell-mode magit-popup package-build with-editor afternoon-theme browse-at-remote helm-projectile helm-chrome magit-filenotify badwolf-theme hive flycheck diffview elfeed visual-regexp helm helm-core zerodark-theme yard-mode yaml-mode wrap-region wgrep web-mode w3m sml-mode smex smartparens smart-forward scss-mode rust-mode ruby-hash-syntax ruby-end ruby-compilation rubocop rspec-mode rhtml-mode rainbow-mode rainbow-delimiters python-mode projectile-rails php-mode paradox pallet ox-twbs org-bullets muttrc-mode multi-term monokai-theme mode-icons markdown-mode magit less-css-mode jump ido-vertical-mode ido-ubiquitous htmlize hlinum helm-company haml-mode graphviz-dot-mode go-mode gnuplot gitignore-mode gitconfig-mode git-timemachine ghc geiser flycheck-rust flycheck-pos-tip flycheck-package flycheck-clojure flycheck-cask flx-ido fill-column-indicator evil-nerd-commenter erlang engine-mode dockerfile-mode dired-open dired-details dired+ diminish diff-hl dash-at-point darkokai-theme crux coffee-mode cm-mode clj-refactor chruby cask-mode auctex aggressive-indent ag ac-emoji ac-cider)))
+ '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -195,7 +195,7 @@ Define a big ol' bunch of handy utility functions.
 I don't usually use the menu or scroll bar, and they take up useful space.
 
 #+BEGIN_SRC emacs-lisp
-  (tool-bar-mode 0)
+  (tool-bar-mode 1)
   (menu-bar-mode 0)
 (when window-system
   (scroll-bar-mode -1))
@@ -213,7 +213,7 @@ Why not?
 I like Firecode...
 #+BEGIN_SRC emacs-lisp
   (when window-system
-    (load-theme 'firecode t))
+    (load-theme 'atom-one-dark t))
 #+END_SRC
 
 ** Disable visual bell
@@ -237,8 +237,8 @@ Note that this overrides the default font-related keybindings from
 =sensible-defaults=.
 
 #+BEGIN_SRC emacs-lisp
-  (setq hrs/default-font "Fira Code Retina")
-  (setq hrs/default-font-size 18)
+  (setq hrs/default-font "Inconsolata")
+  (setq hrs/default-font-size 20)
   (setq hrs/current-font-size hrs/default-font-size)
 
   (setq hrs/font-change-increment 1.1)
@@ -277,6 +277,8 @@ Note that this overrides the default font-related keybindings from
 
   (hrs/reset-font-size)
 #+END_SRC
+
+#+RESULTS:
 
 ** Highlight the current line
 
@@ -345,7 +347,7 @@ programming.
 #+END_SRC
 ** Save buffer upon losing focus
 #+BEGIN_SRC emacs-lisp
-(add-hook 'focus-out-hook 'save-buffer)
+;; (add-hook 'focus-out-hook 'save-buffer)
 #+END_SRC
 * Programming customizations
 
@@ -359,7 +361,7 @@ This reduces that.
 Strip white space on save
 
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
 ** CSS and Sass
@@ -429,7 +431,7 @@ whole expression when point is on a paren.
 
   (dolist (hook lispy-mode-hooks)
     (add-hook hook (lambda ()
-                     (setq show-paren-style 'expression)
+                     ;; (setq show-paren-style 'expression)
                      (paredit-mode)
                      (smartparens-mode)
                      (eldoc-mode)
@@ -1258,7 +1260,7 @@ Turn on Ligitures, this only works with railwaycats build of Emacs
 
 https://github.com/railwaycat/homebrew-emacsmacport/releases
 #+BEGIN_SRC emacs-lisp
-  (mac-auto-operator-composition-mode)
+  ;(mac-auto-operator-composition-mode)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -1440,6 +1442,12 @@ Just a few handy functions.
   (global-set-key (kbd "C-c s") 'multi-term)
   (global-set-key (kbd "C-x g") 'magit-status)
 
+(defun crankyadmin-mark-sexp ()
+(interactive)
+(mark-sexp))
+
+(global-set-key (kbd "C-c m r") 'crankyadmin-mark-sexp)
+
   (require 'crux)
   (global-set-key [remap kill-whole-line] 'crux-kill-whole-line)
   (global-set-key (kbd "s-J") 'crux-top-join-line)
@@ -1449,6 +1457,11 @@ Remap when working in terminal Emacs.
 
 #+BEGIN_SRC emacs-lisp
   (define-key input-decode-map "\e[1;2A" [S-up])
+#+END_SRC
+* Bookmarks
+Save bookmarks to a file
+#+BEGIN_SRC emacs-lisp
+(setq bookmark-default-file "~/.emacs.d/bookmarks" bookmark-save-flag 1)
 #+END_SRC
 * Package settings
 
@@ -1547,6 +1560,14 @@ Same for find files. Because why not.
 (global-set-key (kbd "C-x C-f") #'helm-find-files)
 #+END_SRC
 
+Bookmarks are useful, Helm-bookmarks is really useful.
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c h b") #'helm-bookmarks)
+#+END_SRC
+
+Helm Projectile (Helm in the context of the project), use the keybinding `C-c p h`
+
 And turn Helm mode on
 
 #+BEGIN_SRC emacs-lisp
@@ -1617,4 +1638,29 @@ Because life is better with Emoji
 #+BEGIN_SRC emacs-lisp
 (with-eval-after-load 'flycheck
   (flycheck-pos-tip-mode))
+#+END_SRC
+** Visual Regexp
+
+#+BEGIN_SRC emacs-lisp
+(define-key global-map (kbd "C-c r") 'vr/replace)
+(define-key global-map (kbd "C-c q") 'vr/query-replace)
+#+END_SRC
+** Elfeed
+#+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-x w") 'elfeed)
+
+      (setq elfeed-feeds
+            '(("http://planet.emacsen.org/atom.xml" blog emacs)
+             ;; "http://www.50ply.com/atom.xml"  ; no autotagging
+              ("http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml" news)
+              ("https://news.ycombinator.com/rss" news)
+              ("http://planet.clojure.in/atom.xml" clojure)))
+#+END_SRC
+** Magit
+#+BEGIN_SRC sh
+  git config --global merge.conflictStyle diff3
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+;;(add-hook 'after-save-hook 'magit-after-save-refresh-status)
 #+END_SRC
