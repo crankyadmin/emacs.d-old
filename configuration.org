@@ -39,7 +39,7 @@ Download the latest versions from the following urls and install via method belo
 
 ** add custom path for themes that aren't installed by cask
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/resources/themes/")
+(add-to-list 'load-path "~/.emacs.d/resources/")
 #+END_SRC
 
 * Use sensible-defaults.el
@@ -66,6 +66,10 @@ Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] for so
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/.emacs.d/resources/")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/resources/themes/")
 #+END_SRC
 
 * Package management
@@ -132,14 +136,14 @@ Define a big ol' bunch of handy utility functions.
     (save-excursion
       (shell-command-on-region (mark) (point) "jsonpp" (buffer-name) t)))
 
-  (defun hrs/comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
-    (interactive)
-    (let (beg end)
-      (if (region-active-p)
-          (setq beg (region-beginning) end (region-end))
-        (setq beg (line-beginning-position) end (line-end-position)))
-      (comment-or-uncomment-region beg end)))
+  ;; (defun hrs/comment-or-uncomment-region-or-line ()
+  ;;   "Comments or uncomments the region or the current line if there's no active region."
+  ;;   (interactive)
+  ;;   (let (beg end)
+  ;;     (if (region-active-p)
+  ;;         (setq beg (region-beginning) end (region-end))
+  ;;       (setq beg (line-beginning-position) end (line-end-position)))
+  ;;     (comment-or-uncomment-region beg end)))
 
   (defun hrs/unfill-paragraph ()
     "Takes a multi-line paragraph and makes it into a single line of text."
@@ -195,7 +199,7 @@ Define a big ol' bunch of handy utility functions.
 I don't usually use the menu or scroll bar, and they take up useful space.
 
 #+BEGIN_SRC emacs-lisp
-  (tool-bar-mode 1)
+  (tool-bar-mode 0)
   (menu-bar-mode 0)
 (when window-system
   (scroll-bar-mode -1))
@@ -213,7 +217,14 @@ Why not?
 I like Firecode...
 #+BEGIN_SRC emacs-lisp
   (when window-system
-    (load-theme 'atom-one-dark t))
+    (load-theme 'darkokai t))
+
+;; brighter source buffers
+(add-hook 'find-file-hook 'doom-buffer-mode)
+;; brighter minibuffer when active
+(add-hook 'minibuffer-setup-hook 'doom-brighten-minibuffer)
+;; Custom neotree theme
+;; (require 'doom-neotree)
 #+END_SRC
 
 ** Disable visual bell
@@ -237,8 +248,8 @@ Note that this overrides the default font-related keybindings from
 =sensible-defaults=.
 
 #+BEGIN_SRC emacs-lisp
-  (setq hrs/default-font "Inconsolata")
-  (setq hrs/default-font-size 20)
+  (setq hrs/default-font "Office Code Pro D")
+  (setq hrs/default-font-size 15)
   (setq hrs/current-font-size hrs/default-font-size)
 
   (setq hrs/font-change-increment 1.1)
@@ -1663,4 +1674,11 @@ Because life is better with Emoji
 
 #+BEGIN_SRC emacs-lisp
 ;;(add-hook 'after-save-hook 'magit-after-save-refresh-status)
+#+END_SRC
+** HTML to Hiccup
+#+BEGIN_SRC emacs-lisp
+  (require 'html-to-hiccup)
+
+  (define-key clojure-mode-map (kbd "C-c h h") 'html-to-hiccup-convert-region)
+  (define-key clojurescript-mode-map (kbd "C-c h h") 'html-to-hiccup-convert-region)
 #+END_SRC

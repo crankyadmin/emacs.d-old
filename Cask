@@ -113,3 +113,4 @@
 (depends-on "yard-mode")
 (depends-on "yasnippet")
 (depends-on "zerodark-theme")
+(depends-on "html-to-hiccup")
