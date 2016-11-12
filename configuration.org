@@ -42,16 +42,6 @@ Download the latest versions from the following urls and install via method belo
 (add-to-list 'load-path "~/.emacs.d/resources/")
 #+END_SRC
 
-* Use sensible-defaults.el
-
-Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] for some basic settings.
-
-#+BEGIN_SRC emacs-lisp
-  (load-file "~/.emacs.d/sensible-defaults.el")
-  (sensible-defaults/use-all-settings)
-  (sensible-defaults/use-all-keybindings)
-#+END_SRC
-
 * Set personal information
 
 #+BEGIN_SRC emacs-lisp
@@ -443,7 +433,7 @@ whole expression when point is on a paren.
   (dolist (hook lispy-mode-hooks)
     (add-hook hook (lambda ()
                      ;; (setq show-paren-style 'expression)
-                     (paredit-mode)
+                     ;; (paredit-mode)
                      (smartparens-mode)
                      (eldoc-mode)
                      (rainbow-delimiters-mode))))
@@ -1619,6 +1609,8 @@ Projectile seems to be trashing its path... Drugs?!?
 ** Evil Nerd Commenter
 #+BEGIN_SRC emacs-lisp
   (evilnc-default-hotkeys)
+  (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
+
 #+END_SRC
 ** Auto-complete Emoji
 Because life is better with Emoji
@@ -1681,4 +1673,9 @@ Because life is better with Emoji
 
   (define-key clojure-mode-map (kbd "C-c h h") 'html-to-hiccup-convert-region)
   (define-key clojurescript-mode-map (kbd "C-c h h") 'html-to-hiccup-convert-region)
+#+END_SRC
+** Smartparens
+#+BEGIN_SRC emacs-lisp
+(require 'smartparens-config)
+(global-set-key (kbd "C-)") 'sp-forward-slurp-sexp)
 #+END_SRC
