@@ -1679,3 +1679,13 @@ Because life is better with Emoji
 (require 'smartparens-config)
 (global-set-key (kbd "C-)") 'sp-forward-slurp-sexp)
 #+END_SRC
+** Emacs Dashboard
+
+A shameless extraction of Spacemacs’ startup screen.
+https://github.com/rakanalh/emacs-dashboard
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path (concat user-emacs-directory "/dashboard/"))
+  (require 'dashboard)
+  (dashboard-setup-startup-hook)
+#+END_SRC
