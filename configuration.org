@@ -1676,8 +1676,9 @@ Because life is better with Emoji
 #+END_SRC
 ** Smartparens
 #+BEGIN_SRC emacs-lisp
-(require 'smartparens-config)
-(global-set-key (kbd "C-)") 'sp-forward-slurp-sexp)
+  (require 'smartparens-config)
+  (smartparens-global-mode 1)
+  (global-set-key (kbd "C-)") 'sp-forward-slurp-sexp)
 #+END_SRC
 ** Emacs Dashboard
 
